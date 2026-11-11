@@ -1,0 +1,82 @@
+/* Контур Ремонт: синяя палитра с фото-референса, стеклянные карточки, сцена «входим в комнату» (идея пина Pinterest) */
+:root { --bar-h: 64px; --x-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; --x-ease: cubic-bezier(.2, .8, .2, 1); --x-glow: color-mix(in srgb, var(--c-accent) 50%, transparent); }
+html { scroll-padding-top: calc(var(--bar-h) + 12px); scroll-behavior: smooth; }
+body { padding-top: var(--bar-h); background: radial-gradient(circle at 80% -10%, #17356f 0, transparent 42%), radial-gradient(circle at 0 25%, #112a5c 0, transparent 38%), var(--c-canvas); background-attachment: fixed; }
+
+/* ---------- закреплённое меню ---------- */
+.s-bar { position: fixed; top: 0; left: 0; right: 0; min-height: var(--bar-h); z-index: 60; background: color-mix(in srgb, var(--c-canvas) 58%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border-bottom: 1px solid var(--hair); }
+.s-bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, transparent, #7b9bd0, transparent); transform: scaleX(var(--sp, 0)); transform-origin: 0 50%; pointer-events: none; }
+.s-bar__nav { display: flex; gap: clamp(12px, 1.9vw, 26px); margin-left: auto; margin-right: clamp(10px, 2vw, 26px); }
+.s-bar__nav a { position: relative; color: var(--c-ink); text-decoration: none; font-weight: 500; font-size: .9rem; padding: 8px 0; opacity: .82; transition: opacity .2s; }
+.s-bar__nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: #7b9bd0; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--x-ease); }
+.s-bar__nav a:hover, .s-bar__nav a.is-on { opacity: 1; }
+.s-bar__nav a:hover::after, .s-bar__nav a.is-on::after { transform: scaleX(1); transform-origin: left; }
+.s-bar__burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--hair); background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+.s-bar__burger span, .s-bar__burger span::before, .s-bar__burger span::after { content: ""; position: absolute; left: 12px; width: 20px; height: 2px; background: var(--c-ink); border-radius: 2px; transition: transform .3s var(--x-ease), background .2s; }
+.s-bar__burger span { top: 21px; } .s-bar__burger span::before { left: 0; top: -6px; } .s-bar__burger span::after { left: 0; top: 6px; }
+.s-bar.is-open .s-bar__burger span { background: transparent; }
+.s-bar.is-open .s-bar__burger span::before { transform: translateY(6px) rotate(45deg); }
+.s-bar.is-open .s-bar__burger span::after { transform: translateY(-6px) rotate(-45deg); }
+@media (max-width: 1060px) { .s-bar__tel { display: none; } }
+@media (max-width: 980px) {
+  .s-bar__burger { display: block; }
+  .s-bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; margin: 0; flex-direction: column; gap: 0; padding: 6px var(--gut) 14px; background: color-mix(in srgb, var(--c-canvas) 95%, transparent); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-bottom: 1px solid var(--hair); }
+  .s-bar.is-open .s-bar__nav { display: flex; }
+  .s-bar__nav a { min-height: 50px; display: flex; align-items: center; font-size: 1.05rem; border-bottom: 1px solid var(--hair); }
+  .s-bar__nav a:last-child { border-bottom: 0; }
+  .s-bar__nav a::after { display: none; }
+}
+@media (max-width: 640px) { .s-bar .s-btn--sm { font-size: .78rem; padding: 0 .9em; white-space: nowrap; } }
+
+/* ---------- первый экран: живое «55 м²» контуром ---------- */
+.s-eyebrow { color: #86a6da; }
+.s-hero__bg { height: 100%; }
+.s-hero__bg img { opacity: .5; }
+.x-big { position: absolute; z-index: 2; left: 3%; bottom: -5%; font: 800 clamp(7rem, 22vw, 19rem)/.85 var(--f-display); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.5px rgb(130 160 210 / .3); pointer-events: none; user-select: none; white-space: nowrap; }
+.x-big small { font-size: .42em; letter-spacing: 0; margin-left: .08em; }
+@media (max-width: 960px) { .x-big { font-size: 26vw; left: 2%; bottom: 3%; } }
+
+/* ---------- стеклянные карточки ---------- */
+.s-widget, .s-board__group, .s-incl > div, .s-promises li, .s-reviews li, .s-steps__item, .s-faq details { background: color-mix(in srgb, #fff 7%, transparent) !important; -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); border: 1px solid color-mix(in srgb, #fff 15%, transparent) !important; border-radius: 22px !important; transition: transform .35s var(--x-ease), border-color .3s, box-shadow .3s; }
+.s-widget { background: color-mix(in srgb, var(--c-surface) 78%, transparent) !important; box-shadow: 0 30px 70px rgba(2, 8, 28, .5); }
+.s-board__group { padding: 22px 24px; }
+.s-board__group:hover, .s-promises li:hover, .s-reviews li:hover, .s-steps__item:hover, .s-incl > div:hover { transform: translateY(-6px); border-color: #7b9bd0 !important; box-shadow: 0 20px 44px rgba(2, 8, 28, .45), 0 0 26px -8px var(--x-glow); }
+
+/* ---------- микро-взаимодействия кнопок ---------- */
+.s-btn { position: relative; overflow: hidden; transition: transform .25s var(--x-ease), box-shadow .25s var(--x-ease), background .25s; }
+.s-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px -6px var(--x-glow); }
+.s-btn:active { transform: scale(.95); transition-duration: .08s; }
+.s-btn::after { content: ""; position: absolute; top: 0; left: -70%; width: 45%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .5), transparent); transform: skewX(-20deg); transition: left .6s var(--x-ease); pointer-events: none; }
+.s-btn:hover::after { left: 130%; }
+.x-ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, .5); transform: scale(0); animation: x-rip .6s ease-out forwards; pointer-events: none; }
+@keyframes x-rip { to { transform: scale(4); opacity: 0; } }
+
+/* ---------- сцена «входим в комнату»: тонкий капс, приближение камеры при прокрутке ---------- */
+.x-rooms { margin: clamp(56px, 8vw, 96px) calc(50% - 50vw) 0; position: relative; }
+.x-rooms__track { height: 330vh; position: relative; }
+.x-rooms__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #040d24; }
+.x-rooms__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform, opacity; opacity: 0; transform-origin: 50% 60%; }
+.x-rooms__img:first-child { opacity: 1; }
+.x-rooms__veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(4 13 36 / .5), rgb(4 13 36 / .08) 55%, rgb(4 13 36 / 0)), linear-gradient(to top, rgb(4 13 36 / .55), transparent 38%), linear-gradient(to bottom, rgb(4 13 36 / .35), transparent 22%); pointer-events: none; }
+.x-rooms__top { position: absolute; z-index: 3; top: calc(var(--bar-h) + 1.2rem); left: var(--gut); right: var(--gut); display: flex; justify-content: space-between; font: 500 .72rem/1 var(--x-mono); letter-spacing: .14em; text-transform: uppercase; color: rgb(255 255 255 / .82); }
+.x-rooms__copy { position: absolute; z-index: 3; left: var(--gut); bottom: clamp(4rem, 13vh, 8rem); max-width: min(46rem, 88vw); color: #fff; }
+.x-room { position: absolute; left: 0; bottom: 0; opacity: 0; transform: translateY(14px); will-change: opacity, transform; pointer-events: none; }
+.x-room:first-child { opacity: 1; transform: none; }
+.x-room__tag { font: 500 .78rem/1 var(--x-mono); letter-spacing: .16em; text-transform: uppercase; color: #94b2e0; margin-bottom: 1.1rem; }
+.x-room__title { font: 300 clamp(2.6rem, 9vw, 8.5rem)/.95 var(--f-display); text-transform: uppercase; letter-spacing: var(--ls, .12em); margin: 0; color: #fff; white-space: nowrap; }
+.x-room__sub { font: 500 .78rem/1.5 var(--x-mono); letter-spacing: .14em; text-transform: uppercase; color: rgb(255 255 255 / .8); margin-top: 1.1rem; }
+.x-rooms__dots { position: absolute; z-index: 3; right: var(--gut); top: 50%; transform: translateY(-50%); display: grid; gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
+.x-rooms__dots li { width: 9px; height: 9px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .6); transition: background .3s, transform .3s; }
+.x-rooms__dots li.is-on { background: #fff; transform: scale(1.4); }
+.x-rooms__hint { position: absolute; z-index: 3; right: var(--gut); bottom: 2rem; font: 500 .7rem/1 var(--x-mono); letter-spacing: .16em; text-transform: uppercase; color: rgb(255 255 255 / .75); }
+@media (max-width: 760px) { .x-rooms__track { height: 280vh; } .x-room__title { letter-spacing: var(--ls, .06em); } .x-rooms__top span:last-child { display: none; } }
+@media (prefers-reduced-motion: reduce) { .x-rooms__track { height: auto; } .x-rooms__stage { position: relative; height: 80svh; } .x-big { display: none; } html { scroll-behavior: auto; } .s-btn::after { display: none; } }
+
+/* ---------- фото в рамках ---------- */
+.s-photos figure { position: relative; overflow: visible; }
+.s-photos figure > img { border-radius: 20px; }
+.s-photos figure::before, .s-photos figure::after { content: ""; position: absolute; width: 24px; height: 24px; border: 2px solid #7b9bd0; opacity: .85; pointer-events: none; z-index: 2; transition: transform .35s var(--x-ease); }
+.s-photos figure::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; border-top-left-radius: 8px; }
+.s-photos figure::after { right: 8px; bottom: 44px; border-left: 0; border-top: 0; border-bottom-right-radius: 8px; }
+.s-photos figure:hover::before { transform: translate(-4px, -4px); } .s-photos figure:hover::after { transform: translate(4px, 4px); }
+.s-photos figcaption { font-family: var(--x-mono); letter-spacing: .04em; }
